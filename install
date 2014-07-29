@@ -1,13 +1,13 @@
 #!/bin/bash
 
 echo -n 'Installing F123BOX'
-if [ -e /bin/f123box ]
+if [ -e /usr/bin/f123box ]
 then
-    rm /bin/f123box
+    rm /usr/bin/f123box
 fi
-cp f123box /bin
-chmod a+r /bin/f123box
-chmod a+x /bin/f123box
+cp f123box /usr/bin
+chmod a+r /usr/bin/f123box
+chmod a+x /usr/bin/f123box
 if [ -e /usr/share/f123box ]
 then
     rm -r /usr/share/f123box
@@ -33,7 +33,7 @@ if [ -e /etc/cron.hourly/f123box ]
 then
     rm /etc/cron.hourly/f123box
 fi
-ln -s /bin/f123box /etc/cron.hourly/f123box >> /dev/null 2>> /dev/null
+ln -s /usr/bin/f123box /etc/cron.hourly/f123box >> /dev/null 2>> /dev/null
 echo -n -e "\nLanguage:"
 read language
 direc=/usr/f123box
