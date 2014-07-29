@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo -n 'Installing F123BOX'
+if [ -e /bin/f123box ]
+then
+    rm /bin/f123box
+fi
+cp f123box /bin
+chmod a+r /bin/f123box
+chmod a+x /bin/f123box
+if [ -e /usr/share/f123box ]
+then
+    rm -r /usr/share/f123box
+fi
+cp -r usr/share/f123box /usr/share
+chmod a+r -R /usr/share/f123box
+chmod a+x -R /usr/share/f123box
+if [ -e /etc/f123box/ ]
+then
+#    rm -r /etc/f123ers/
+    rm /etc/f123box/f123box.conf
+    cp -r etc/f123box/f123box.conf /etc/f123box/f123box.conf
+    chmod a+r -R /etc/f123box/
+    chmod a+x /etc/f123box/
+else
+    cp -r etc/f123box/ /etc/
+    chmod a+r -R /etc/f123box/
+    chmod a+x /etc/f123box/
+fi
+#gpg --import key >> /dev/null 2>> /dev/null
+#(su root -c "gpg --import key") >> /dev/null 2>> /dev/null
+if [ -e /etc/cron.hourly/f123box ]
+then
+    rm /etc/cron.hourly/f123box
+fi
+ln -s /bin/f123box /etc/cron.hourly/f123box >> /dev/null 2>> /dev/null
+echo -n -e "\nLanguage:"
+read language
+direc=/usr/f123box
+echo -e "repo=\"f123.org\"\nurlpath=\"f123box\"\nlanguage=\"$language\"\nboxdir=\"$direc\"" | tee /etc/f123box/f123box.conf >> /dev/null 2>> /dev/null
+echo '       [ ok ]'
