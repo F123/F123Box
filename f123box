@@ -2,11 +2,8 @@
 
 usr="/usr/share/f123box"
 etc="/etc/f123box"
-#IFS=$'\n'
 temp="/tmp"
-#stamp=$(cat $etc/version)
 source $etc/f123box.conf
-#source $usr/language/$language
 today=$(date +%Y%m%d)
 
 
@@ -26,7 +23,6 @@ mkdir -p $boxdir
 cd $boxdir
 wget $urlbase/md5.txt -O md5.txt
 
-#md5sum --quiet -c md5.txt | grep \:\ FAILED | cut -f -1 -d \: | cut -f 2- -d \/ 
 md5sum --quiet -c md5.txt | cut -f -1 -d \: > temp.txt
 
 updates=$(sort temp.txt | uniq | sort - $usr/removed $usr/removed | uniq -u | cut -f 2- -d \/ )
